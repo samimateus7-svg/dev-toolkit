@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Code | dev-toolkit</title>
-    <!-- Fuentes premium de Google Fonts -->
+    <!-- Símbolo favicon de la pestaña -->
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Base Estética Premium en Modo Oscuro */
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #0b0b0b; 
@@ -39,60 +39,57 @@
         
         .container { 
             max-width: 800px; 
-            margin: 60px auto; 
+            margin: 100px auto; 
             padding: 0 20px; 
             text-align: center; 
         }
         
         h1 { 
             font-family: 'Cinzel', serif; 
-            font-size: 32px; 
+            font-size: 36px; 
             color: #ffffff; 
             font-weight: 400; 
-            margin-bottom: 10px; 
+            margin-bottom: 15px; 
         }
         
         .subtitle { 
-            color: #666666; 
-            font-size: 15px; 
-            margin-bottom: 40px; 
+            color: #888888; 
+            font-size: 16px; 
+            margin-bottom: 50px; 
             font-weight: 300; 
+            line-height: 1.6;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        /* Envoltura Premium para Centrar la Ventana del Formulario */
-        .form-wrapper { 
+        /* Caja del Gateway */
+        .gateway-card { 
             background-color: #141416; 
             border: 1px solid #222225; 
-            padding: 12px; 
+            padding: 50px 40px; 
             border-radius: 8px; 
             display: inline-block; 
             width: 100%; 
-            max-width: 660px; 
+            max-width: 500px; 
             box-shadow: 0 15px 30px rgba(0,0,0,0.5); 
-            overflow: hidden; 
             box-sizing: border-box;
-            margin-bottom: 40px; /* Espacio para que el botón respire abajo */
         }
 
-        /* Ventana interna nativa limpia */
-        iframe { 
-            width: 100%; 
-            border: none; 
-            border-radius: 4px; 
-            background-color: #ffffff; 
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Botón de Enlace al Formulario */
+        .btn-gate {
             display: block;
-        }
-
-        /* 👑 BOTÓN VOLVER DORADO PREMIUM */
-        .back-container {
-            margin-top: 10px;
-            margin-bottom: 60px;
-        }
-
-        .btn-back {
-            display: inline-block;
+            width: 100%;
+            max-width: 320px;
             background-color: #e5a93b; 
-            padding: 14px 40px; 
+            padding: 16px 20px; 
             border-radius: 4px; 
             color: #000000; 
             font-weight: 600;
@@ -100,13 +97,39 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(229, 169, 59, 0.2);
+            box-sizing: border-box;
+        }
+
+        .btn-gate:hover { 
+            background-color: #f1b955;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(229, 169, 59, 0.3);
+        }
+
+        /* Botón Secundario Volver */
+        .btn-back {
+            display: inline-block;
+            background-color: transparent; 
+            color: #a0a0a0;
+            border: 1px solid #333333;
+            padding: 14px 40px; 
+            border-radius: 4px; 
+            font-weight: 500;
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 320px;
+            box-sizing: border-box;
         }
 
         .btn-back:hover { 
-            background-color: #f1b955;
-            transform: translateY(-2px);
+            border-color: #ffffff;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -115,16 +138,16 @@
     
     <main class="container">
         <h1>Contribute Snippet</h1>
-        <div class="subtitle">Submit your functional script directly through our secure Google Forms gateway.</div>
+        <p class="subtitle">Share your functional scripts with the developer community via our verified form gateway.</p>
         
-        <div class="form-wrapper">
-            <!-- Tu código de incrustación real y nativo -->
-            <iframe src="https://google.com" width="640" height="1275" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
-        </div>
-
-        <!-- 👑 Aquí está el contenedor con el nuevo botón volver -->
-        <div class="back-container">
-            <a href="index.html" class="btn-back">← Back to Home</a>
+        <div class="gateway-card">
+            <div class="btn-container">
+                <!-- El enlace abre tu Google Form en una pestaña nueva limpia y sin bloqueos corporativos -->
+                <a href="https://google.com" target="_blank" class="btn-gate">Open Google Gateway ➔</a>
+                
+                <!-- Botón para regresar al Home -->
+                <a href="index.html" class="btn-back">← Back to Home</a>
+            </div>
         </div>
     </main>
 </body>
