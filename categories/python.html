@@ -22,16 +22,18 @@
         .category-header { border-bottom: 1px solid #1a1a1a; padding-bottom: 30px; margin-bottom: 40px; }
         h1 { font-family: 'Cinzel', serif; font-size: 32px; color: #ffffff; font-weight: 400; margin: 0 0 10px 0; }
         .tech-badge { background-color: #1e293b; color: #38bdf8; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
-        .code-list { display: flex; flex-direction: column; gap: 30px; }
+        .code-list { display: flex; flex-direction: column; gap: 40px; }
         .code-item { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 30px; }
         .code-title { color: #ffffff; font-size: 20px; font-weight: 500; margin: 0 0 10px 0; }
         .code-description { color: #888888; font-size: 15px; line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
         .code-snippet { background-color: #0b0b0c; border: 1px solid #1a1a1c; border-radius: 6px; padding: 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #abb2bf; overflow-x: auto; margin: 0 0 20px 0; white-space: pre; line-height: 1.5; }
         
-        .key { color: #c678dd; } .fun { color: #61afef; } .str { color: #98c379; } .num { color: #d19a66; }
+        /* Syntax Highlighting */
+        .key { color: #c678dd; } .fun { color: #61afef; } .str { color: #98c379; } .num { color: #d19a66; } .cmt { color: #5c6370; font-style: italic; }
+        
         .actions-container { display: flex; gap: 15px; }
         .action-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
-        .btn-download { background-color: #e5a93b; color: #000000; border: none; font-weight: 600; }
+        .btn-download { background-color: #e5a93b; color: #000000; border: none; font-weight: 600; text-decoration: none; }
         .btn-download:hover { background-color: #f1b955; }
         .btn-copy { background-color: transparent; color: #ffffff; border: 1px solid #333333; }
         .btn-copy:hover { background-color: #1a1a1c; border-color: #666666; }
@@ -48,6 +50,8 @@
             <h1>Automation Scripts</h1>
         </div>
         <div class="code-list">
+
+            <!-- 1. WEB SCRAPING BOILERPLATE -->
             <div class="code-item">
                 <h2 class="code-title">Web Scraping Boilerplate (BeautifulSoup)</h2>
                 <p class="code-description">A clean, functional template to fetch HTML content from any website, bypass basic user-agent blocks, and parse elements safely.</p>
@@ -66,6 +70,97 @@
                     <button class="action-btn btn-download" onclick="downloadCode('py-scraping', 'scraper.py')">Download .py</button>
                 </div>
             </div>
+
+            <!-- 2. ROBUST API REQUEST WITH RETRIES -->
+            <div class="code-item">
+                <h2 class="code-title">Robust API Request Wrapper with Retries</h2>
+                <p class="code-description">Executes HTTP requests safely by implementing exponential backoff re-attempts when hitting rate limits or temporary connection drops.</p>
+                <pre class="code-snippet" id="py-api-request"><span class="key">import</span> time
+<span class="key">import</span> requests
+
+<span class="key">def</span> <span class="fun">safe_request</span>(url, retries=<span class="num">3</span>, backoff=<span class="num">2</span>):
+    <span class="key">for</span> i <span class="key">in</span> <span class="fun">range</span>(retries):
+        <span class="key">try</span>:
+            response = requests.<span class="fun">get</span>(url, timeout=<span class="num">5</span>)
+            <span class="key">if</span> response.status_code == <span class="num">200</span>:
+                <span class="key">return</span> response.<span class="fun">json</span>()
+        <span class="key">except</span> requests.RequestException:
+            <span class="key">if</span> i == retries - <span class="num">1</span>: <span class="key">raise</span>
+            time.<span class="fun">sleep</span>(backoff ** i)
+    <span class="key">return</span> <span class="key">None</span></pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('py-api-request', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('py-api-request', 'api_request.py')">Download .py</button>
+                </div>
+            </div>
+
+            <!-- 3. DIRECTORY CLEANER / ORGANIZER -->
+            <div class="code-item">
+                <h2 class="code-title">Automated Directory Organizer</h2>
+                <p class="code-description">Scans a targeted directory path and maps local files into categorized subfolders (Images, Docs, Audio, etc.) based matching file extensions.</p>
+                <pre class="code-snippet" id="py-organizer"><span class="key">import</span> os
+<span class="key">import</span> shutil
+
+<span class="key">def</span> <span class="fun">organize_folder</span>(target_dir):
+    extensions = {
+        <span class="str">'Images'</span>: [<span class="str">'.jpg'</span>, <span class="str">'.jpeg'</span>, <span class="str">'.png'</span>, <span class="str">'.gif'</span>],
+        <span class="str">'Docs'</span>: [<span class="str">'.pdf'</span>, <span class="str">'.docx'</span>, <span class="str">'.txt'</span>, <span class="str">'.xlsx'</span>],
+        <span class="str">'Audio'</span>: [<span class="str">'.mp3'</span>, <span class="str">'.wav'</span>, <span class="str">'.flac'</span>]
+    }
+    <span class="key">for</span> filename <span class="key">in</span> os.<span class="fun">listdir</span>(target_dir):
+        filepath = os.path.<span class="fun">join</span>(target_dir, filename)
+        <span class="key">if</span> os.path.<span class="fun">isfile</span>(filepath):
+            _, ext = os.path.<span class="fun">splitext</span>(filename)
+            <span class="key">for</span> folder, ext_list <span class="key">in</span> extensions.<span class="fun">items</span>():
+                <span class="key">if</span> ext.<span class="fun">lower</span>() <span class="key">in</span> ext_list:
+                    dest_folder = os.path.<span class="fun">join</span>(target_dir, folder)
+                    os.<span class="fun">makedirs</span>(dest_folder, exist_ok=<span class="key">True</span>)
+                    shutil.<span class="fun">move</span>(filepath, os.path.<span class="fun">join</span>(dest_folder, filename))</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('py-organizer', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('py-organizer', 'organizer.py')">Download .py</button>
+                </div>
+            </div>
+
+            <!-- 4. CONCURRENT TASK EXECUTION -->
+            <div class="code-item">
+                <h2 class="code-title">Concurrent ThreadPool Worker</h2>
+                <p class="code-description">Utilizes a thread pool workers pool to process multiple network or input/output bound functions simultaneously, significantly cutting execution bottlenecks.</p>
+                <pre class="code-snippet" id="py-concurrent"><span class="key">from</span> concurrent.futures <span class="key">import</span> ThreadPoolExecutor
+
+<span class="key">def</span> <span class="fun">process_item</span>(item):
+    <span class="cmt"># Simulates operational task workflow</span>
+    <span class="key">return</span> f<span class="str">"Processed {item}"</span>
+
+<span class="key">def</span> <span class="fun">run_parallel</span>(data_list, workers=<span class="num">4</span>):
+    <span class="key">with</span> <span class="fun">ThreadPoolExecutor</span>(max_workers=workers) <span class="key">as</span> executor:
+        results = executor.<span class="fun">map</span>(process_item, data_list)
+    <span class="key">return</span> <span class="fun">list</span>(results)</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('py-concurrent', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('py-concurrent', 'parallel_worker.py')">Download .py</button>
+                </div>
+            </div>
+
+            <!-- 5. LIGHTWEIGHT HARDWARE RESOURCE MONITOR -->
+            <div class="code-item">
+                <h2 class="code-title">System Resource Metrics Logger</h2>
+                <p class="code-description">Retrieves vital performance telemetry from the underlying operating system environment, exporting simple system allocations metrics cleanly.</p>
+                <pre class="code-snippet" id="py-monitor"><span class="key">import</span> psutil
+
+<span class="key">def</span> <span class="fun">get_system_metrics</span>():
+    metrics = {
+        <span class="str">'cpu_usage_pct'</span>: psutil.<span class="fun">cpu_percent</span>(interval=<span class="num">1</span>),
+        <span class="str">'ram_usage_pct'</span>: psutil.<span class="fun">virtual_memory</span>().percent,
+        <span class="str">'disk_free_gb'</span>: psutil.<span class="fun">disk_usage</span>(<span class="str">'/'</span>).free / (<span class="num">1024</span>**<span class="num">3</span>)
+    }
+    <span class="key">return</span> metrics</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('py-monitor', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('py-monitor', 'metrics.py')">Download .py</button>
+                </div>
+            </div>
+
         </div>
     </main>
     <script>
