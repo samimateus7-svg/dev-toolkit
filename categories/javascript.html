@@ -22,13 +22,15 @@
         .category-header { border-bottom: 1px solid #1a1a1a; padding-bottom: 30px; margin-bottom: 40px; }
         h1 { font-family: 'Cinzel', serif; font-size: 32px; color: #ffffff; font-weight: 400; margin: 0 0 10px 0; }
         .tech-badge { background-color: #2e2a1f; color: #e5a93b; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
-        .code-list { display: flex; flex-direction: column; gap: 30px; }
+        .code-list { display: flex; flex-direction: column; gap: 40px; }
         .code-item { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 30px; }
         .code-title { color: #ffffff; font-size: 20px; font-weight: 500; margin: 0 0 10px 0; }
         .code-description { color: #888888; font-size: 15px; line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
         .code-snippet { background-color: #0b0b0c; border: 1px solid #1a1a1c; border-radius: 6px; padding: 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #abb2bf; overflow-x: auto; margin: 0 0 20px 0; white-space: pre; line-height: 1.5; }
         
-        .key { color: #e5c07b; } .typ { color: #c678dd; } .str { color: #98c379; } .num { color: #d19a66; }
+        /* Syntax Highlighting Base */
+        .key { color: #e5c07b; } .typ { color: #c678dd; } .str { color: #98c379; } .num { color: #d19a66; } .cmt { color: #5c6370; font-style: italic; }
+        
         .actions-container { display: flex; gap: 15px; }
         .action-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
         .btn-download { background-color: #e5a93b; color: #000000; border: none; font-weight: 600; text-decoration: none; }
@@ -48,6 +50,8 @@
             <h1>Functional Scripts</h1>
         </div>
         <div class="code-list">
+
+            <!-- 1. DEBOUNCE -->
             <div class="code-item">
                 <h2 class="code-title">Debounce Function for UI Optimization</h2>
                 <p class="code-description">Limits the rate at which a function can fire. Perfect for handling window resizing, scrolling, or real-time search inputs elegantly without destroying performance.</p>
@@ -63,6 +67,89 @@
                     <button class="action-btn btn-download" onclick="downloadCode('code-debounce', 'debounce.js')">Download .js</button>
                 </div>
             </div>
+
+            <!-- 2. THROTTLE -->
+            <div class="code-item">
+                <h2 class="code-title">Throttle Function for Rate Limiting</h2>
+                <p class="code-description">Ensures a function is called at most once in a specified time interval. Ideal for continuous event streams like drag-and-drop, canvas rendering, or window scroll listening.</p>
+                <pre class="code-snippet" id="code-throttle"><span class="typ">const</span> <span class="key">throttle</span> = (fn, limit) => {
+    <span class="typ">let</span> inThrottle;
+    <span class="typ">return</span> (...args) => {
+        <span class="typ">if</span> (!inThrottle) {
+            <span class="key">fn</span>(...args);
+            inThrottle = <span class="typ">true</span>;
+            <span class="key">setTimeout</span>(() => inThrottle = <span class="typ">false</span>, limit);
+        }
+    };
+};</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('code-throttle', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('code-throttle', 'throttle.js')">Download .js</button>
+                </div>
+            </div>
+
+            <!-- 3. DEEP CLONE -->
+            <div class="code-item">
+                <h2 class="code-title">Deep Clone Objects & Arrays</h2>
+                <p class="code-description">Creates a completely detached clone of complex objects or nested arrays. It leverages native modern platform APIs while maintaining zero external dependencies.</p>
+                <pre class="code-snippet" id="code-deepclone"><span class="typ">const</span> <span class="key">deepClone</span> = (obj) => {
+    <span class="typ">if</span> (obj === <span class="typ">null</span> || <span class="typ">typeof</span> obj !== <span class="str">"object"</span>) <span class="typ">return</span> obj;
+    
+    <span class="cmt">// Modern modern browsers fallback using native structuredClone</span>
+    <span class="typ">if</span> (<span class="typ">typeof</span> structuredClone === <span class="str">"function"</span>) {
+        <span class="typ">return</span> <span class="key">structuredClone</span>(obj);
+    }
+    
+    <span class="typ">return</span> JSON.<span class="key">parse</span>(JSON.<span class="key">stringify</span>(obj));
+};</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('code-deepclone', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('code-deepclone', 'deepClone.js')">Download .js</button>
+                </div>
+            </div>
+
+            <!-- 4. URL QUERY MANAGER -->
+            <div class="code-item">
+                <h2 class="code-title">URL Query Parameters Parser</h2>
+                <p class="code-description">Converts the browser's current `window.location.search` query parameters directly into a clean, key-value JavaScript Object for state management.</p>
+                <pre class="code-snippet" id="code-urlparams"><span class="typ">const</span> <span class="key">getQueryParams</span> = () => {
+    <span class="typ">const</span> params = <span class="typ">new</span> <span class="key">URLSearchParams</span>(window.location.search);
+    <span class="typ">const</span> entries = params.<span class="key">entries</span>();
+    <span class="typ">return</span> Object.<span class="key">fromEntries</span>(entries);
+};</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('code-urlparams', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('code-urlparams', 'queryParams.js')">Download .js</button>
+                </div>
+            </div>
+
+            <!-- 5. TIME AGO FORMATTER -->
+            <div class="code-item">
+                <h2 class="code-title">Relative Time Formatter (Time Ago)</h2>
+                <p class="code-description">Calculates the relative distance between a target date and the present, parsing it into a human-readable text string like "3 hours ago" or "just now".</p>
+                <pre class="code-snippet" id="code-timeago"><span class="typ">const</span> <span class="key">timeAgo</span> = (date) => {
+    <span class="typ">const</span> now = <span class="typ">new</span> <span class="key">Date</span>();
+    <span class="typ">const</span> seconds = Math.<span class="key">floor</span>((now - <span class="typ">new</span> <span class="key">Date</span>(date)) / <span class="num">1000</span>);
+    
+    <span class="typ">const</span> intervals = {
+        year: <span class="num">31536000</span>, month: <span class="num">2592000</span>, day: <span class="num">864000</span>,
+        hour: <span class="num">3600</span>, minute: <span class="num">60</span>
+    };
+
+    <span class="typ">for</span> (<span class="typ">const</span> [unit, value] <span class="typ">of</span> Object.<span class="key">entries</span>(intervals)) {
+        <span class="typ">const</span> count = Math.<span class="key">floor</span>(seconds / value);
+        <span class="typ">if</span> (count >= <span class="num">1</span>) {
+            <span class="typ">return</span> `${count} ${unit}${count > <span class="num">1</span> ? <span class="str">'s'</span> : <span class="str">''</span>} ago`;
+        }
+    }
+    <span class="typ">return</span> <span class="str">'just now'</span>;
+};</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('code-timeago', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('code-timeago', 'timeAgo.js')">Download .js</button>
+                </div>
+            </div>
+
         </div>
     </main>
     <script>
