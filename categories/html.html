@@ -10,6 +10,10 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 🌟 Tema oscuro de Prism.js para colorear HTML/CSS automáticamente sin spans manuales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b0b0b; color: #e0e0e0; margin: 0; padding: 0; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; background-color: #0f0f0f; border-bottom: 1px solid #1a1a1a; }
@@ -29,12 +33,10 @@
         .code-item { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 30px; }
         .code-title { color: #ffffff; font-size: 20px; font-weight: 500; margin: 0 0 10px 0; }
         .code-description { color: #888888; font-size: 15px; line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
-        .code-snippet { background-color: #0b0b0c; border: 1px solid #1a1a1c; border-radius: 6px; padding: 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #abb2bf; overflow-x: auto; margin: 0 0 20px 0; white-space: pre; line-height: 1.5; }
         
-        /* Paleta de Colores de etiquetas HTML */
-        .tag { color: #e06c75; }  /* Etiquetas: div, button, class */
-        .att { color: #d19a66; }  /* Atributos: class, id, src */
-        .val { color: #98c379; }  /* Valores de atributos: "modal", "btn" */
+        /* Integración limpia de bloques de código Prism */
+        pre[class*="language-"] { background-color: #0b0b0c !important; border: 1px solid #1a1a1c !important; border-radius: 6px; padding: 18px; margin: 0 0 20px 0; font-size: 14px; }
+        code[class*="language-"] { font-family: 'Courier New', Courier, monospace !important; }
 
         .actions-container { display: flex; gap: 15px; }
         .action-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -60,35 +62,170 @@
             <div class="code-item">
                 <h2 class="code-title">Accessible Modal Overlay Layout</h2>
                 <p class="code-description">A lightweight boilerplate for an interactive pop-up window centered on the viewport with background blurring effects.</p>
-                <pre class="code-snippet" id="code-modal">&lt;<span class="tag">div</span> <span class="att">class</span>=<span class="val">"modal-overlay"</span>&gt;
-    &lt;<span class="tag">div</span> <span class="att">class</span>=<span class="val">"modal-card"</span> <span class="att">id</span>=<span class="val">"mainModal"</span>&gt;
-        &lt;<span class="tag">h3</span> <span class="att">class</span>=<span class="val">"modal-title"</span>&gt;Confirm Action&lt;/<span class="tag">h3</span>&gt;
-        &lt;<span class="tag">p</span>&gt;Are you sure you want to deploy this build?&lt;/<span class="tag">p</span>&gt;
-        &lt;<span class="tag">button</span> <span class="att">class</span>=<span class="val">"btn btn-close"</span>&gt;Close&lt;/<span class="tag">button</span>&gt;
-    &lt;/<span class="tag">div</span>&gt;
-&lt;/<span class="tag">div</span>&gt;</pre>
+                <pre><code class="language-html" data-filename="modal.html">&lt;div class="modal-overlay"&gt;
+    &lt;div class="modal-card" id="mainModal"&gt;
+        &lt;h3 class="modal-title"&gt;Confirm Action&lt;/h3&gt;
+        &lt;p&gt;Are you sure you want to deploy this build?&lt;/p&gt;
+        &lt;button class="btn btn-close"&gt;Close&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
                 <div class="actions-container">
-                    <button class="action-btn btn-copy" onclick="copyToClipboard('code-modal', this)">Copy Code</button>
-                    <button class="action-btn btn-download" onclick="downloadCode('code-modal', 'modal.html')">Download .html</button>
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .html</button>
+                </div>
+            </div>
+
+            <!-- Código 2: Tarjeta Glassmorphism UI -->
+            <div class="code-item">
+                <h2 class="code-title">Glassmorphism Profile Card</h2>
+                <p class="code-description">A premium visual card layout using CSS backdrop-filter blur and transparent borders for sleek modern interfaces.</p>
+                <pre><code class="language-html" data-filename="glass_card.html">&lt;div class="glass-card"&gt;
+    &lt;div class="profile-avatar"&gt;&lt;/div&gt;
+    &lt;h2 class="profile-name"&gt;Sami Dev&lt;/h2&gt;
+    &lt;p class="profile-role"&gt;Full-Stack & Game Developer&lt;/p&gt;
+    &lt;button class="btn-profile"&gt;View Portfolio&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    width: 300px;
+    text-align: center;
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e5a93b, #e34f26);
+    border-radius: 50%;
+    margin: 0 auto 16px auto;
+}
+.profile-name {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+.profile-role {
+    font-size: 14px;
+    color: #888888;
+    margin: 0 0 20px 0;
+}
+.btn-profile {
+    background: #e5a93b;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #000000;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+&lt;/style&gt;</code></pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .html</button>
+                </div>
+            </div>
+
+            <!-- Código 3: Responsive Navigation Bar -->
+            <div class="code-item">
+                <h2 class="code-title">Responsive Navbar Layout</h2>
+                <p class="code-description">Clean, fluid header navigation blueprint that smoothly adapts to mobile and desktop displays without heavy external libraries.</p>
+                <pre><code class="language-html" data-filename="navbar.html">&lt;nav class="navbar"&gt;
+    &lt;a href="#" class="nav-logo"&gt;DEV-TOOLKIT&lt;/a&gt;
+    &lt;div class="nav-links"&gt;
+        &lt;a href="#" class="nav-item active"&gt;Home&lt;/a&gt;
+        &lt;a href="#" class="nav-item"&gt;Components&lt;/a&gt;
+        &lt;a href="#" class="nav-item"&gt;Scripts&lt;/a&gt;
+        &lt;a href="#" class="nav-item"&gt;Docs&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;style&gt;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #0f0f0f;
+    border-bottom: 1px solid #1a1a1a;
+}
+.nav-logo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+.nav-item {
+    color: #888888;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.nav-item:hover, .nav-item.active {
+    color: #e5a93b;
+}
+@media (max-width: 768px) {
+    .navbar { padding: 20px; }
+    .nav-links { display: none; } /* Implementar menú hamburguesa aquí */
+}
+&lt;/style&gt;</code></pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .html</button>
                 </div>
             </div>
 
         </div>
     </main>
+
+    <!-- 🌟 Scripts de Prism.js para procesar la sintaxis automáticamente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
     <script>
-        function copyToClipboard(elementId, button) {
-            const codeText = document.getElementById(elementId).innerText;
+        // Automatizado: Extrae el texto interno del bloque code hermano
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-item').querySelector('code');
+            const codeText = codeBlock.innerText;
+            
             navigator.clipboard.writeText(codeText).then(() => {
-                const originalText = button.innerText; button.innerText = "✓ Copied!"; button.style.borderColor = "#00e676"; button.style.color = "#00e676";
-                setTimeout(() => { button.innerText = originalText; button.style.borderColor = "#333333"; button.style.color = "#ffffff"; }, 2000);
+                const originalText = button.innerText; 
+                button.innerText = "✓ Copied!"; 
+                button.style.borderColor = "#00e676"; 
+                button.style.color = "#00e676";
+                setTimeout(() => { 
+                    button.innerText = originalText; 
+                    button.style.borderColor = "#333333"; 
+                    button.style.color = "#ffffff"; 
+                }, 2000);
             });
         }
-        function downloadCode(elementId, filename) {
-            const codeText = document.getElementById(elementId).innerText;
+
+        // Automatizado: Descarga el archivo plano usando el atributo data-filename
+        function downloadCode(button) {
+            const codeBlock = button.closest('.code-item').querySelector('code');
+            const codeText = codeBlock.innerText;
+            const filename = codeBlock.getAttribute('data-filename') || 'component.html';
+            
             const blob = new Blob([codeText], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
-            const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
-            document.body.removeChild(a); URL.revokeObjectURL(url);
+            const a = document.createElement('a'); 
+            a.href = url; 
+            a.download = filename; 
+            document.body.appendChild(a); 
+            a.click();
+            document.body.removeChild(a); 
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
