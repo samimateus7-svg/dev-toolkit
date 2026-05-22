@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Toolkit | dev-toolkit</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
 
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b0b0b; color: #e0e0e0; margin: 0; padding: 0; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; background-color: #0f0f0f; border-bottom: 1px solid #1a1a1a; }
@@ -51,7 +51,54 @@
         </div>
         <div class="code-list">
 
-            <!-- 1. WEB SCRAPING BOILERPLATE -->
+            <div class="code-item">
+                <h2 class="code-title">Simple Chatbot</h2>
+                <p class="code-description">A lightweight, keyword-based interactive assistant workflow. Uses dictionary parsing and randomized variations to provide flexible console conversational mechanics.</p>
+                <pre class="code-snippet" id="py-chatbot"><span class="key">import</span> random
+
+<span class="cmt"># Respuestas predefinidas basadas en palabras clave</span>
+respuestas_base = {
+    <span class="str">"hola"</span>: [<span class="str">"¡Hola! ¿En qué puedo ayudarte hoy?"</span>, <span class="str">"¡Hola! Qué gusto saludarte."</span>],
+    <span class="str">"ayuda"</span>: [<span class="str">"Claro, ¿qué necesitas saber?"</span>, <span class="str">"Dime, ¿en qué te puedo colaborar?"</span>],
+    <span class="str">"precio"</span>: [<span class="str">"Nuestros precios varían según el servicio. ¿Podrías darme más detalles?"</span>, <span class="str">"Puedes consultar nuestra lista de precios en la página web."</span>],
+    <span class="str">"gracias"</span>: [<span class="str">"¡De nada! Es un placer ayudarte."</span>, <span class="str">"¡No hay de qué! Que tengas un excelente día."</span>],
+    <span class="str">"adios"</span>: [<span class="str">"¡Hasta luego!"</span>, <span class="str">"¡Adiós! Que estés muy bien, vuelve pronto."</span>]
+}
+
+<span class="key">def</span> <span class="fun">obtener_respuesta</span>(mensaje):
+    mensaje = mensaje.<span class="fun">lower</span>()
+    
+    <span class="cmt"># Busca palabras clave en el mensaje del usuario</span>
+    <span class="key">for</span> palabra, respuestas <span class="key">in</span> respuestas_base.<span class="fun">items</span>():
+        <span class="key">if</span> palabra <span class="key">in</span> mensaje:
+            <span class="key">return</span> random.<span class="fun">choice</span>(respuestas)
+            
+    <span class="cmt"># Respuesta por defecto si no hay coincidencias</span>
+    <span class="key">return</span> <span class="str">"Lo siento, no entiendo esa instrucción. ¿Podrías reformularla?"</span>
+
+<span class="key">def</span> <span class="fun">main</span>():
+    <span class="fun">print</span>(<span class="str">"🤖 ¡Hola! Soy tu asistente virtual. Escribe 'salir' para terminar."</span>)
+    
+    <span class="key">while</span> <span class="key">True</span>:
+        <span class="cmt"># Captura lo que escribe el usuario</span>
+        entrada_usuario = <span class="fun">input</span>(<span class="str">"\nTú: "</span>)
+        
+        <span class="cmt"># Condición para salir del chat</span>
+        <span class="key">if</span> entrada_usuario.<span class="fun">lower</span>() == <span class="str">"salir"</span>:
+            <span class="fun">print</span>(<span class="str">"Chatbot: ¡Hasta luego!"</span>)
+            <span class="key">break</span>
+            
+        respuesta = <span class="fun">obtener_respuesta</span>(entrada_usuario)
+        <span class="fun">print</span>(f<span class="str">"Chatbot: {respuesta}"</span>)
+
+<span class="key">if</span> __name__ == <span class="str">"__main__"</span>:
+    <span class="fun">main</span>()</pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyToClipboard('py-chatbot', this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode('py-chatbot', 'chatbot.py')">Download .py</button>
+                </div>
+            </div>
+
             <div class="code-item">
                 <h2 class="code-title">Web Scraping Boilerplate (BeautifulSoup)</h2>
                 <p class="code-description">A clean, functional template to fetch HTML content from any website, bypass basic user-agent blocks, and parse elements safely.</p>
@@ -71,7 +118,6 @@
                 </div>
             </div>
 
-            <!-- 2. ROBUST API REQUEST WITH RETRIES -->
             <div class="code-item">
                 <h2 class="code-title">Robust API Request Wrapper with Retries</h2>
                 <p class="code-description">Executes HTTP requests safely by implementing exponential backoff re-attempts when hitting rate limits or temporary connection drops.</p>
@@ -94,7 +140,6 @@
                 </div>
             </div>
 
-            <!-- 3. DIRECTORY CLEANER / ORGANIZER -->
             <div class="code-item">
                 <h2 class="code-title">Automated Directory Organizer</h2>
                 <p class="code-description">Scans a targeted directory path and maps local files into categorized subfolders (Images, Docs, Audio, etc.) based matching file extensions.</p>
@@ -122,7 +167,6 @@
                 </div>
             </div>
 
-            <!-- 4. CONCURRENT TASK EXECUTION -->
             <div class="code-item">
                 <h2 class="code-title">Concurrent ThreadPool Worker</h2>
                 <p class="code-description">Utilizes a thread pool workers pool to process multiple network or input/output bound functions simultaneously, significantly cutting execution bottlenecks.</p>
@@ -142,7 +186,6 @@
                 </div>
             </div>
 
-            <!-- 5. LIGHTWEIGHT HARDWARE RESOURCE MONITOR -->
             <div class="code-item">
                 <h2 class="code-title">System Resource Metrics Logger</h2>
                 <p class="code-description">Retrieves vital performance telemetry from the underlying operating system environment, exporting simple system allocations metrics cleanly.</p>
