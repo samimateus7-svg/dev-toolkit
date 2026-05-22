@@ -24,12 +24,14 @@
         h1 { font-family: 'Cinzel', serif; font-size: 32px; color: #ffffff; font-weight: 400; margin-bottom: 10px; letter-spacing: 1px; }
         .subtitle { color: #666666; font-size: 15px; margin-bottom: 40px; font-weight: 300; }
         .grid-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .category-card { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+        .category-card { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform 0.2s, border-color 0.2s; cursor: pointer; min-height: 110px; }
         .category-card:hover { transform: translateY(-3px); border-color: #e5a93b; }
         .card-top { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
         .card-icon { font-size: 24px; background-color: #1c1c1f; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #2d2d31; }
         .card-title { color: #ffffff; font-size: 18px; font-weight: 500; margin: 0; }
-        .card-counter { color: #00e676; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+        
+        /* Enlace limpio para ver la colección sin números inventados */
+        .card-counter { color: #e5a93b; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
         .card-counter::after { content: '➔'; font-size: 11px; transition: transform 0.2s; }
         .category-card:hover .card-counter::after { transform: translateX(4px); }
     </style>
@@ -45,41 +47,47 @@
         <h1>Code Categories</h1>
         <div class="subtitle">Select a technology to browse available production-ready codes.</div>
         <div class="grid-categories">
+            
             <a href="python.html" class="category-card">
                 <div class="card-top">
                     <div class="card-icon" style="color: #3776AB;">🐍</div>
                     <h2 class="card-title">Python Automation</h2>
                 </div>
-                <div class="card-counter">24 functional codes</div>
+                <div class="card-counter">View Collection</div>
             </a>
+
             <a href="javascript.html" class="category-card">
                 <div class="card-top">
                     <div class="card-icon" style="color: #F7DF1E; background-color: #323330;">🟨</div>
                     <h2 class="card-title">JavaScript Utility</h2>
                 </div>
-                <div class="card-counter">18 functional codes</div>
+                <div class="card-counter">View Collection</div>
             </a>
+
             <a href="sql.html" class="category-card">
                 <div class="card-top">
                     <div class="card-icon" style="color: #00758F;">🐬</div>
                     <h2 class="card-title">SQL & Databases</h2>
                 </div>
-                <div class="card-counter">12 functional codes</div>
+                <div class="card-counter">View Collection</div>
             </a>
+
             <a href="google-script.html" class="category-card">
                 <div class="card-top">
                     <div class="card-icon" style="color: #34A853;">📊</div>
                     <h2 class="card-title">Google Apps Script</h2>
                 </div>
-                <div class="card-counter">9 functional codes</div>
+                <div class="card-counter">View Collection</div>
             </a>
+
             <a href="html.html" class="category-card">
                 <div class="card-top">
                     <div class="card-icon" style="color: #34A853;">🌐</div>
                     <h2 class="card-title">HTML</h2>
                 </div>
-                <div class="card-counter">9 functional codes</div>
+                <div class="card-counter">View Collection</div>
             </a>
+
         </div>
     </main>
 </body>
