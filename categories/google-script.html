@@ -9,12 +9,15 @@
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 🌟 Tema oscuro de Prism.js para colorear el código automáticamente -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0b0b0b; color: #e0e0e0; margin: 0; padding: 0; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; background-color: #0f0f0f; border-bottom: 1px solid #1a1a1a; }
         .logo { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 600; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; }
         
-        /* 👑 BOTÓN VOLVER PREMIUM */
         .btn-back { background-color: #e5a93b; padding: 10px 22px; border-radius: 4px; color: #000000; text-decoration: none; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: background-color 0.3s; }
         .btn-back:hover { background-color: #f1b955; }
 
@@ -26,9 +29,11 @@
         .code-item { background-color: #141416; border: 1px solid #222225; border-radius: 8px; padding: 30px; }
         .code-title { color: #ffffff; font-size: 20px; font-weight: 500; margin: 0 0 10px 0; }
         .code-description { color: #888888; font-size: 15px; line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
-        .code-snippet { background-color: #0b0b0c; border: 1px solid #1a1a1c; border-radius: 6px; padding: 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #abb2bf; overflow-x: auto; margin: 0 0 20px 0; white-space: pre; line-height: 1.5; }
         
-        .typ { color: #c678dd; } .key { color: #e5c07b; } .fun { color: #61afef; } .str { color: #98c379; }
+        /* Ajuste premium para integrar Prism.js con tu fondo */
+        pre[class*="language-"] { background-color: #0b0b0c !important; border: 1px solid #1a1a1c !important; border-radius: 6px; padding: 18px; margin: 0 0 20px 0; font-size: 14px; }
+        code[class*="language-"] { font-family: 'Courier New', Courier, monospace !important; }
+
         .actions-container { display: flex; gap: 15px; }
         .action-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
         .btn-download { background-color: #e5a93b; color: #000000; border: none; font-weight: 600; }
@@ -48,37 +53,149 @@
             <h1>Google Workspace Automation</h1>
         </div>
         <div class="code-list">
+            
+            <!-- CÓDIGO 1: Auto-Send PDF -->
             <div class="code-item">
                 <h2 class="code-title">Auto-Send PDF via Gmail</h2>
                 <p class="code-description">Converts a specific spreadsheet tab into a PDF and automatically emails it using GmailApp services.</p>
-                <pre class="code-snippet" id="gs-pdf"><span class="typ">function</span> <span class="fun">emailSpreadsheetAsPDF</span>() {
-  var sheet = <span class="key">SpreadsheetApp</span>.<span class="fun">getActiveSpreadsheet</span>();
-  var blob = sheet.<span class="fun">getAs</span>(<span class="str">'application/pdf'</span>).<span class="fun">setName</span>(<span class="str">"Report.pdf"</span>);
-  <span class="key">GmailApp</span>.<span class="fun">sendEmail</span>(<span class="str">"admin@example.com"</span>, <span class="str">"Daily Report"</span>, <span class="str">"Please find attached."</span>, {
+                <pre><code class="language-javascript" data-filename="send_report.gs">function emailSpreadsheetAsPDF() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var blob = sheet.getAs('application/pdf').setName("Report.pdf");
+  GmailApp.sendEmail("admin@example.com", "Daily Report", "Please find attached.", {
     attachments: [blob]
   });
-}</pre>
+}</code></pre>
                 <div class="actions-container">
-                    <button class="action-btn btn-copy" onclick="copyToClipboard('gs-pdf', this)">Copy Code</button>
-                    <button class="action-btn btn-download" onclick="downloadCode('gs-pdf', 'send_report.gs')">Download .gs</button>
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .gs</button>
                 </div>
             </div>
+
+            <!-- CÓDIGO 2: Create Calendar Event -->
+            <div class="code-item">
+                <h2 class="code-title">Create Calendar Event</h2>
+                <p class="code-description">Creates a new event in your primary Google Calendar with specified details directly from data inputs.</p>
+                <pre><code class="language-javascript" data-filename="create_event.gs">function createCalendarEvent() {
+  var calendar = CalendarApp.getDefaultCalendar();
+  var title = "Project Sync";
+  var startTime = new Date("May 25, 2026 10:00:00 EST");
+  var endTime = new Date("May 25, 2026 11:00:00 EST");
+  calendar.createEvent(title, startTime, endTime, {
+    description: "Reviewing dev-toolkit updates."
+  });
+}</code></pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .gs</button>
+                </div>
+            </div>
+
+            <!-- CÓDIGO 3: Gmail Auto-Delete Automation -->
+            <div class="code-item">
+                <h2 class="code-title">Gmail Bulk Auto-Delete</h2>
+                <p class="code-description">Automatically filters and clears out old inbox emails while safely preserving key documents using safety word tags.</p>
+                <pre><code class="language-javascript" data-filename="gmail_cleaner.gs">function borradoMasivoTotal() {
+  // =========================================================================
+  // 1. CONFIGURACIÓN (Modifica solo esta sección)
+  // =========================================================================
+  
+  // Escribe tus palabras a SALVAR separadas por un espacio
+  var palabrasA_Salvar = 'factura contrato banco'; 
+  
+  // Fecha límite: Borrará TODO lo anterior a este día (Formato: AAAA/MM/DD)
+  // Ejemplo: '2025/05/22' (Borrará lo viejo de hace un año hacia atrás)
+  var fechaLimite = '2025/05/22'; 
+  
+  // =========================================================================
+  // 2. MOTOR DEL PROGRAMA (Bucle automático de borrado)
+  // =========================================================================
+  
+  // Procesa las palabras clave con el signo menos
+  var exclusiones = '';
+  if (palabrasA_Salvar.trim() !== '') {
+    exclusiones = palabrasA_Salvar.split(' ')
+      .map(function(palabra) { return '-"' + palabra.trim() + '"'; })
+      .join(' ');
+  }
+  
+  // Construye el filtro combinando la bandeja, la fecha hacia atrás y las exclusiones
+  // Ejemplo: "label:inbox before:2025/05/22 -factura"
+  var queryFinal = ('label:inbox before:' + fechaLimite + ' ' + exclusiones).trim();
+  
+  var totalBorrados = 0;
+  var continuarBorrando = true;
+  
+  // Bucle Continuo: Se repite solo hasta que la búsqueda se quede sin correos
+  while (continuarBorrando) {
+    // Trae lotes de 100 en 100 (El máximo permitido por Google para mover a la papelera)
+    var hilos = GmailApp.search(queryFinal, 0, 100);
+    
+    if (hilos.length > 0) {
+      GmailApp.moveThreadsToTrash(hilos);
+      totalBorrados += hilos.length;
+      
+      // Pausa técnica de medio segundo para evitar saturar el servidor de Google
+      Utilities.sleep(500); 
+    } else {
+      // Si ya no encuentra correos en el lote, rompe el ciclo automáticamente
+      continuarBorrando = false;
+    }
+  }
+  
+  // Registro final en la consola al terminar todo el trabajo
+  if (totalBorrados > 0) {
+    Logger.log('¡Limpieza Completa! Se borraron automáticamente un total de ' + totalBorrados + ' correos antiguos.');
+    Logger.log('Se respetaron los correos que contenían las palabras: ' + palabrasA_Salvar);
+  } else {
+    Logger.log('Terminado: No se encontraron correos anteriores al ' + fechaLimite + ' para borrar.');
+  }
+}</code></pre>
+                <div class="actions-container">
+                    <button class="action-btn btn-copy" onclick="copyCode(this)">Copy Code</button>
+                    <button class="action-btn btn-download" onclick="downloadCode(this)">Download .gs</button>
+                </div>
+            </div>
+
         </div>
     </main>
+
+    <!-- 🌟 Scripts de Prism.js para que procese la sintaxis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
     <script>
-        function copyToClipboard(elementId, button) {
-            const codeText = document.getElementById(elementId).innerText;
+        // Automatizado: Detecta el código del contenedor donde diste click
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-item').querySelector('code');
+            const codeText = codeBlock.innerText;
+            
             navigator.clipboard.writeText(codeText).then(() => {
-                const originalText = button.innerText; button.innerText = "✓ Copied!"; button.style.borderColor = "#00e676"; button.style.color = "#00e676";
-                setTimeout(() => { button.innerText = originalText; button.style.borderColor = "#333333"; button.style.color = "#ffffff"; }, 2000);
+                const originalText = button.innerText; 
+                button.innerText = "✓ Copied!"; 
+                button.style.borderColor = "#00e676"; 
+                button.style.color = "#00e676";
+                setTimeout(() => { 
+                    button.innerText = originalText; 
+                    button.style.borderColor = "#333333"; 
+                    button.style.color = "#ffffff"; 
+                }, 2000);
             });
         }
-        function downloadCode(elementId, filename) {
-            const codeText = document.getElementById(elementId).innerText;
+
+        // Automatizado: Descarga usando el atributo 'data-filename' definido arriba
+        function downloadCode(button) {
+            const codeBlock = button.closest('.code-item').querySelector('code');
+            const codeText = codeBlock.innerText;
+            const filename = codeBlock.getAttribute('data-filename') || 'script.gs';
+            
             const blob = new Blob([codeText], { type: 'text/javascript' });
             const url = URL.createObjectURL(blob);
-            const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
-            document.body.removeChild(a); URL.revokeObjectURL(url);
+            const a = document.createElement('a'); 
+            a.href = url; 
+            a.download = filename; 
+            document.body.appendChild(a); 
+            a.click();
+            document.body.removeChild(a); 
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
